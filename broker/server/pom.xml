@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.mzlnk.authn</groupId>
-    <artifactId>authn-identity-broker</artifactId>
+    <groupId>io.mzlnk.identitybroker</groupId>
+    <artifactId>identity-broker-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>server</name>
+    <name>identity-broker-server</name>
     <description>Intermediary service that allows to connect service providers with multiple identity providers in terms of authentication</description>
     <url>https://github.com/mzlnk/authn-identity-broker</url>
 
