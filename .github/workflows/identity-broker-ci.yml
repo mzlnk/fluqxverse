@@ -1,0 +1,39 @@
+name: 'identity-broker CI'
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+      - 'develop'
+      - 'feature/**'
+      - 'bugfix/**'
+      - 'hotfix/**'
+      - 'release/**'
+      - 'tmp/**'
+
+jobs:
+  tests:
+    name: 'run tests'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setting up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: run tests (server)
+        working-directory: broker/server
+        run: mvn clean verify
+
+      - name: run tests (spring-boot-autoconfigure)
+        working-directory: broker/spring-boot/autoconfigure
+        run: mvn clean install
+
+      - name: run tests (spring-boot-starter)
+        working-directory: broker/spring-boot/starter
+        run: mvn clean verify
