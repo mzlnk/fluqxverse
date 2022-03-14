@@ -1,0 +1,31 @@
+.loginButtonContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.loginButtonContainer:hover {
+  cursor: pointer;
+  box-shadow: #d7d7d7 0 0 5px;
+}
+
+.icon {
+  padding: 10px;
+  height: 25px;
+  width: auto;
+  color: white;
+}
+
+.text {
+  padding: 10px 10px 12px 0;
+  color: black;
+}
+
+a:link {
+  text-decoration: none;
+}

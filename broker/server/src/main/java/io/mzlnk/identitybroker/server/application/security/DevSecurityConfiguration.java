@@ -27,6 +27,7 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration cors = new CorsConfiguration();
         cors.setAllowedOrigins(List.of("http://localhost:3000"));
+        cors.setAllowedOrigins(List.of("http://192.168.0.164:3000"));
         cors.setAllowedMethods(List.of("GET"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

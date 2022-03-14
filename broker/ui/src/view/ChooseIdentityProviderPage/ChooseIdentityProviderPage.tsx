@@ -35,11 +35,9 @@ const ChooseIdentityProviderPage = () => {
   }, [])
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.container}>
-        <h3>Choose provider</h3>
-        {identityProviders.map((provider: IdentityProvider, idx: number) => createLoginButton(provider))}
-      </div>
+    <div className={styles.container}>
+      <h3>Choose provider</h3>
+      {identityProviders.map((provider: IdentityProvider, idx: number) => createLoginButton(provider))}
     </div>
   )
 }

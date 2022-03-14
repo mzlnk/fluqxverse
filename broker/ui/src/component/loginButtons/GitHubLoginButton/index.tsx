@@ -7,7 +7,7 @@ const GitHubLoginButton = ({ clientId, redirectUri }: LoginButtonProps) => {
   return (
     <a
       href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=profile`}>
-      <div className={styles.container}>
+      <div className={styles.gitHubLoginContainer}>
         <SiGithub className={styles.icon}/>
         <span className={styles.text}>Sign In with GitHub</span>
       </div>
