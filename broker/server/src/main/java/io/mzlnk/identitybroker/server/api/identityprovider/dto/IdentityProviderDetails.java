@@ -1,4 +1,4 @@
-package io.mzlnk.identitybroker.server.api.dto;
+package io.mzlnk.identitybroker.server.api.identityprovider.dto;
 
 import io.mzlnk.identitybroker.server.domain.identityprovider.IdentityProviderType;
 
