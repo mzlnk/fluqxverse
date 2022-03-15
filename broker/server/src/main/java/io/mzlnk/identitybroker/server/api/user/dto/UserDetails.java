@@ -1,6 +1,6 @@
 package io.mzlnk.identitybroker.server.api.user.dto;
 
-import io.mzlnk.identitybroker.server.domain.identityprovider.IdentityProviderType;
+import io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderType;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package io.mzlnk.identitybroker.server.api.identityprovider.dto;
 
-import io.mzlnk.identitybroker.server.domain.identityprovider.IdentityProvider;
+import io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProvider;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -2,7 +2,7 @@ package io.mzlnk.identitybroker.server.api.identityprovider;
 
 import io.mzlnk.identitybroker.server.api.identityprovider.dto.IdentityProviderDetails;
 import io.mzlnk.identitybroker.server.api.identityprovider.dto.IdentityProviderMapper;
-import io.mzlnk.identitybroker.server.domain.identityprovider.IdentityProviderService;
+import io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,9 +1,7 @@
 package io.mzlnk.identitybroker.server.domain.user;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.mzlnk.identitybroker.server.domain.identity.Identity;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -11,8 +9,10 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter(AccessLevel.PACKAGE)
+@Builder
 @Table(name = "USERS")
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     private static final String USERS_SEQUENCE = "USERS_SEQ";
@@ -26,6 +26,6 @@ public class User {
     private String email;
 
     @OneToMany(mappedBy = "user")
-    private Set<IdentityProviderUser> identityProviderUsers;
+    private Set<Identity> identities;
 
 }

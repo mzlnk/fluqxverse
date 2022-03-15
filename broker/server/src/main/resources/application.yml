@@ -1,2 +1,30 @@
+auth:
+  callback:
+    cookie:
+      name: "token"
+      domain: "localhost"
+      path: "/"
+      same-site: "Lax"
+      max-age: 3600
+      secure: false
+      http-only: false
+  jwt:
+    token:
+      issuer: "accounts.mzlnk.io"
+      expiration-time: 3600
+    validation:
+      private-key: "secrets/ids-key-v1.key"
+      public-key: "secrets/ids-key-v1.crt"
+
+oauth2:
+  exchange:
+    providers:
+      google:
+        client-id: ""
+        client-secret: ""
+        redirect-uri: "http://localhost:8080/api/v1/auth/callback/google"
+
+
+
 server:
   port: 8080

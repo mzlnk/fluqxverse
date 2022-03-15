@@ -1,4 +1,4 @@
-package io.mzlnk.identitybroker.server.domain.identityprovider;
+package io.mzlnk.identitybroker.server.domain.identity.provider;
 
 public record IdentityProvider(IdentityProviderType type,
                                String clientId,
