@@ -73,11 +73,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.mzlnk.oauth2.exchange</groupId>
-            <artifactId>oauth2-exchange-spring-boot-starter</artifactId>
-            <version>0.1.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>3.19.0</version>
@@ -88,6 +83,17 @@
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
             <version>1.33.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kohsuke</groupId>
+            <artifactId>github-api</artifactId>
+            <version>1.303</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.mzlnk.oauth2.exchange</groupId>
+            <artifactId>oauth2-exchange-core</artifactId>
+            <version>0.1.1</version>
         </dependency>
 
 

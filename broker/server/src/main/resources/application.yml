@@ -20,7 +20,12 @@ auth:
       client-id: ""
       client-secret: ""
       redirect-uri: "http://localhost:8080/api/v1/auth/callback/google"
-      enabled: false
+      enabled: true
+    GITHUB:
+      client-id: ""
+      client-secret: ""
+      redirect-uri: "http://localhost:8080/api/v1/auth/callback/github"
+      enabled: true
 
 server:
   port: 8080

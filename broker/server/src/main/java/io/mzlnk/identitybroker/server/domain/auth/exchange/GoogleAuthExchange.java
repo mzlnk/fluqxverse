@@ -7,42 +7,34 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import io.mzlnk.identitybroker.server.application.auth.AuthProviderProperties;
 import io.mzlnk.identitybroker.server.application.auth.jwt.JwtService;
-import io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderType;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 
-import static io.mzlnk.identitybroker.server.application.auth.AuthProviderProperties.AuthProviderDetails;
+import static io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderType.GOOGLE;
 
 @Service
 @ConditionalOnProperty(prefix = "auth.providers.GOOGLE", name = "enabled", havingValue = "true")
-public class GoogleAuthExchange implements AuthExchange {
+public class GoogleAuthExchange extends BaseAuthExchange {
 
     private final JwtService jwtService;
-    private final AuthProviderDetails googleAuthDetails;
     private final AuthorizationCodeFlow flow;
 
     public GoogleAuthExchange(AuthProviderProperties authProviderProperties,
                               JwtService jwtService) {
-        var googleAuthDetails = authProviderProperties.getProvider(IdentityProviderType.GOOGLE);
+        super(GOOGLE, authProviderProperties);
 
         this.jwtService = jwtService;
-        this.googleAuthDetails = googleAuthDetails;
-        this.flow = initializeAuthorizationCodeFlow(googleAuthDetails);
-    }
-
-    @Override
-    public IdentityProviderType getSupportedIdentityProvider() {
-        return IdentityProviderType.GOOGLE;
+        this.flow = initializeAuthorizationCodeFlow();
     }
 
     @Override
     public AuthExchangeDetails exchangeAuthorizationCodeForIdentity(String code) {
         try {
             TokenResponse tokenResponse = flow.newTokenRequest(code)
-                    .setRedirectUri(googleAuthDetails.getRedirectUri())
+                    .setRedirectUri(authProviderDetails.getRedirectUri())
                     .execute();
 
             var decodedToken = jwtService.decodeToken((String) tokenResponse.get("id_token"));
@@ -55,12 +47,12 @@ public class GoogleAuthExchange implements AuthExchange {
         }
     }
 
-    private AuthorizationCodeFlow initializeAuthorizationCodeFlow(AuthProviderDetails googleAuthDetails) {
+    private AuthorizationCodeFlow initializeAuthorizationCodeFlow() {
         return new GoogleAuthorizationCodeFlow.Builder(
                 new NetHttpTransport(),
                 GsonFactory.getDefaultInstance(),
-                googleAuthDetails.getClientId(),
-                googleAuthDetails.getClientSecret(),
+                authProviderDetails.getClientId(),
+                authProviderDetails.getClientSecret(),
                 List.of("profile", "email")
         ).build();
     }
