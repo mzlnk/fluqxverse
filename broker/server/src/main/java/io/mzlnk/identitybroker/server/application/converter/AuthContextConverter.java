@@ -12,21 +12,22 @@ public class AuthContextConverter implements Converter<String, AuthContext> {
         try {
             String[] data = s.split(",");
 
-            String redirectUri = getValue(data, "ruri");
-            return new AuthContext(redirectUri);
+            String redirectUri = getValue(data, "ruri", "");
+            String nonce = getValue(data, "nce", "");
+            return new AuthContext(redirectUri, nonce);
         } catch (Exception e) {
             log.error("Could not parse auth context", e);
             return null;
         }
     }
 
-    private String getValue(String[] data, String key) {
+    private String getValue(String[] data, String key, String defaultValue) {
         for (String d : data) {
             if (d.startsWith(key)) {
                 return d.split("=")[1];
             }
         }
-        return null;
+        return defaultValue;
     }
 
 }

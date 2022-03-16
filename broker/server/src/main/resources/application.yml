@@ -15,16 +15,12 @@ auth:
     validation:
       private-key: "secrets/ids-key-v1.key"
       public-key: "secrets/ids-key-v1.crt"
-
-oauth2:
-  exchange:
-    providers:
-      google:
-        client-id: ""
-        client-secret: ""
-        redirect-uri: "http://localhost:8080/api/v1/auth/callback/google"
-
-
+  providers:
+    GOOGLE:
+      client-id: ""
+      client-secret: ""
+      redirect-uri: "http://localhost:8080/api/v1/auth/callback/google"
+      enabled: false
 
 server:
   port: 8080

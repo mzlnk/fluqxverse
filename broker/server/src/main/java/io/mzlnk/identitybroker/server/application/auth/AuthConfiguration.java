@@ -20,6 +20,12 @@ public class AuthConfiguration {
     }
 
     @Bean
+    @ConfigurationProperties(prefix = "auth")
+    public AuthProviderProperties authProviderProperties() {
+        return new AuthProviderProperties();
+    }
+
+    @Bean
     @ConfigurationProperties(prefix = "auth.jwt.token")
     public JwtTokenProperties jwtTokenProperties() {
         return new JwtTokenProperties();

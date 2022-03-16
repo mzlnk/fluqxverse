@@ -1,4 +1,4 @@
-package io.mzlnk.identitybroker.server.domain.identity.exchange;
+package io.mzlnk.identitybroker.server.domain.auth.exchange;
 
 import io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderType;
 import io.mzlnk.oauth2.exchange.core.authorizationcode.GitHubAuthorizationCodeExchange;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @ConditionalOnBean(value = GitHubAuthorizationCodeExchange.class)
-public class GitHubIdentityExchange implements IdentityExchange {
+public class GitHubAuthExchange implements AuthExchange {
 
     private final GitHubAuthorizationCodeExchange authorizationCodeExchange;
 
@@ -19,7 +19,7 @@ public class GitHubIdentityExchange implements IdentityExchange {
     }
 
     @Override
-    public IdentityExchangeDetails exchangeAuthorizationCodeForIdentity(String code) {
+    public AuthExchangeDetails exchangeAuthorizationCodeForIdentity(String code) {
         return null;
     }
 

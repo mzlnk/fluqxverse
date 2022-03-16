@@ -1,8 +1,8 @@
-package io.mzlnk.identitybroker.server.api.identityprovider;
+package io.mzlnk.identitybroker.server.api.identity;
 
-import io.mzlnk.identitybroker.server.api.identityprovider.dto.IdentityProviderDetails;
-import io.mzlnk.identitybroker.server.api.identityprovider.dto.IdentityProviderMapper;
-import io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderService;
+import io.mzlnk.identitybroker.server.api.identity.dto.IdentityProviderDetails;
+import io.mzlnk.identitybroker.server.api.identity.dto.IdentityProviderMapper;
+import io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderStorage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +17,11 @@ import java.util.List;
 public class IdentityProviderController {
 
     private final IdentityProviderMapper identityProviderMapper;
-    private final IdentityProviderService identityProviderService;
+    private final IdentityProviderStorage identityProviderStorage;
 
     @GetMapping
     public ResponseEntity<List<IdentityProviderDetails>> listIdentityProviders() {
-        var providers = identityProviderService.listIdentityProviders().stream()
+        var providers = identityProviderStorage.listIdentityProviders().stream()
                 .map(identityProviderMapper::toIdentityProviderDetails)
                 .toList();
 
