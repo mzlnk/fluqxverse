@@ -1,9 +1,9 @@
-package io.mzlnk.identitybroker.server.api.auth;
+package io.mzlnk.identitybroker.server.api.callback;
 
 import io.mzlnk.identitybroker.server.application.auth.AuthCallbackProperties;
-import io.mzlnk.identitybroker.server.domain.auth.AuthDetails;
-import io.mzlnk.identitybroker.server.domain.auth.AuthExchangeManager;
-import io.mzlnk.identitybroker.server.domain.auth.OAuth2AuthorizationCodeDetails;
+import io.mzlnk.identitybroker.server.domain.callback.AuthDetails;
+import io.mzlnk.identitybroker.server.domain.callback.AuthCallbackService;
+import io.mzlnk.identitybroker.server.domain.callback.OAuth2AuthorizationCodeDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -20,27 +20,27 @@ import static org.springframework.http.HttpStatus.MOVED_PERMANENTLY;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
-public class AuthController {
+public class AuthCallbackController {
 
     private final AuthCallbackProperties authCallbackProperties;
-    private final AuthExchangeManager authExchangeManager;
+    private final AuthCallbackService authCallbackService;
 
     @GetMapping("/callback/github")
     public ResponseEntity<Void> handleGitHubCallback(@RequestParam(name = "code") String code,
-                                                     @RequestParam(name = "state") AuthContext context) {
+                                                     @RequestParam(name = "state") AuthCallbackContext context) {
         // TODO: provide verification for nonce retrieved from state
-        AuthDetails authDetails = authExchangeManager.establishAuthenticity(new OAuth2AuthorizationCodeDetails(code, GITHUB));
+        AuthDetails authDetails = authCallbackService.establishAuthenticity(new OAuth2AuthorizationCodeDetails(code, GITHUB));
         return prepareResponse(authDetails.token(), context);
     }
 
     @GetMapping("/callback/google")
     public ResponseEntity<Void> handleGoogleCallback(@RequestParam(name = "code") String code,
-                                                     @RequestParam(name = "state") AuthContext context) {
-        AuthDetails authDetails = authExchangeManager.establishAuthenticity(new OAuth2AuthorizationCodeDetails(code, GOOGLE));
+                                                     @RequestParam(name = "state") AuthCallbackContext context) {
+        AuthDetails authDetails = authCallbackService.establishAuthenticity(new OAuth2AuthorizationCodeDetails(code, GOOGLE));
         return prepareResponse(authDetails.token(), context);
     }
 
-    private ResponseEntity<Void> prepareResponse(String token, AuthContext context) {
+    private ResponseEntity<Void> prepareResponse(String token, AuthCallbackContext context) {
         var cookieParams = authCallbackProperties.getCookie();
 
         ResponseCookie cookie = ResponseCookie.from(cookieParams.getName(), token)

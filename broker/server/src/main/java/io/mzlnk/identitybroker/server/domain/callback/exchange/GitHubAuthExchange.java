@@ -1,13 +1,9 @@
-package io.mzlnk.identitybroker.server.domain.auth.exchange;
+package io.mzlnk.identitybroker.server.domain.callback.exchange;
 
 import io.mzlnk.identitybroker.server.application.auth.AuthProviderProperties;
 import io.mzlnk.oauth2.exchange.core.authorizationcode.GitHubAuthorizationCodeExchange;
 import io.mzlnk.oauth2.exchange.core.authorizationcode.client.GitHubOAuth2Client;
-import io.mzlnk.oauth2.exchange.core.authorizationcode.response.dto.GitHubOAuth2TokenResponse;
 import io.mzlnk.oauth2.exchange.core.authorizationcode.response.dto.OAuth2TokenResponse;
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import org.kohsuke.github.GHEmail;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;

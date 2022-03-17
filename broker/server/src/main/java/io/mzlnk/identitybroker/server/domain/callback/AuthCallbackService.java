@@ -1,8 +1,8 @@
-package io.mzlnk.identitybroker.server.domain.auth;
+package io.mzlnk.identitybroker.server.domain.callback;
 
 import io.mzlnk.identitybroker.server.application.auth.jwt.JwtService;
-import io.mzlnk.identitybroker.server.domain.auth.exchange.AuthExchange;
-import io.mzlnk.identitybroker.server.domain.auth.exchange.AuthExchangeDetails;
+import io.mzlnk.identitybroker.server.domain.callback.exchange.AuthExchange;
+import io.mzlnk.identitybroker.server.domain.callback.exchange.AuthExchangeDetails;
 import io.mzlnk.identitybroker.server.domain.identity.Identity;
 import io.mzlnk.identitybroker.server.domain.identity.IdentityStorage;
 import io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderType;
@@ -21,7 +21,7 @@ import static io.mzlnk.identitybroker.server.domain.identity.IdentityStorage.Ide
 import static io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderNotSupportedException.identityProviderNotSupported;
 
 @Service
-public class AuthExchangeManager {
+public class AuthCallbackService {
 
     private final IdentityStorage identityStorage;
     private final UserStorage userStorage;
@@ -29,7 +29,7 @@ public class AuthExchangeManager {
 
     private final Map<IdentityProviderType, AuthExchange> identityExchanges;
 
-    public AuthExchangeManager(IdentityStorage identityStorage,
+    public AuthCallbackService(IdentityStorage identityStorage,
                                UserStorage userStorage,
                                JwtService jwtService,
                                List<AuthExchange> authExchanges) {

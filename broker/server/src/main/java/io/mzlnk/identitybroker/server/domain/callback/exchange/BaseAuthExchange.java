@@ -1,4 +1,4 @@
-package io.mzlnk.identitybroker.server.domain.auth.exchange;
+package io.mzlnk.identitybroker.server.domain.callback.exchange;
 
 import io.mzlnk.identitybroker.server.application.auth.AuthProviderProperties;
 import io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderType;

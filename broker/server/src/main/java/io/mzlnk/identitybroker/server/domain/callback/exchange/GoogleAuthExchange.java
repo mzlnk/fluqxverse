@@ -1,4 +1,4 @@
-package io.mzlnk.identitybroker.server.domain.auth.exchange;
+package io.mzlnk.identitybroker.server.domain.callback.exchange;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.TokenResponse;
