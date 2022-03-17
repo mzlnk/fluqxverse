@@ -43,7 +43,7 @@ public class GoogleAuthExchange extends BaseAuthExchange {
 
             return new AuthExchangeDetails(id, email);
         } catch (IOException e) {
-            throw new RuntimeException(e); // TODO: handle it properly
+            throw new AuthCallbackException(e.getMessage());
         }
     }
 

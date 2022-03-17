@@ -1,6 +1,7 @@
 package io.mzlnk.identitybroker.server.domain.callback.exchange;
 
 import io.mzlnk.identitybroker.server.application.auth.AuthProviderProperties;
+import io.mzlnk.oauth2.exchange.core.ExchangeException;
 import io.mzlnk.oauth2.exchange.core.authorizationcode.GitHubAuthorizationCodeExchange;
 import io.mzlnk.oauth2.exchange.core.authorizationcode.client.GitHubOAuth2Client;
 import io.mzlnk.oauth2.exchange.core.authorizationcode.response.dto.OAuth2TokenResponse;
@@ -28,31 +29,31 @@ public class GitHubAuthExchange extends BaseAuthExchange {
 
     @Override
     public AuthExchangeDetails exchangeAuthorizationCodeForIdentity(String code) {
-        OAuth2TokenResponse tokenResponse = exchange.exchangeAuthorizationCode(code);
-        String token = tokenResponse.getAccessToken();
+        try {
+            OAuth2TokenResponse tokenResponse = exchange.exchangeAuthorizationCode(code);
+            String token = tokenResponse.getAccessToken();
 
-        GitHubUserDetails userDetails = retrieveUserDetails(token);
-        return new AuthExchangeDetails(userDetails.userId(), userDetails.primaryEmail());
+            GitHubUserDetails userDetails = retrieveUserDetails(token);
+            return new AuthExchangeDetails(userDetails.userId(), userDetails.primaryEmail());
+        } catch (IOException | ExchangeException e) {
+            throw new AuthCallbackException(e.getMessage());
+        }
     }
 
-    private GitHubUserDetails retrieveUserDetails(String token) {
-        try {
-            GitHub gitHub = new GitHubBuilder().withOAuthToken(token).build();
+    private GitHubUserDetails retrieveUserDetails(String token) throws IOException {
+        GitHub gitHub = new GitHubBuilder().withOAuthToken(token).build();
 
-            var user = gitHub.getMyself();
+        var user = gitHub.getMyself();
 
-            String primaryEmail = user.getEmails2().stream()
-                    .filter(GHEmail::isPrimary)
-                    .findFirst()
-                    .map(GHEmail::getEmail)
-                    .orElseThrow(IllegalStateException::new);
+        String primaryEmail = user.getEmails2().stream()
+                .filter(GHEmail::isPrimary)
+                .findFirst()
+                .map(GHEmail::getEmail)
+                .orElseThrow(IllegalStateException::new);
 
-            String userId = String.valueOf(user.getId());
+        String userId = String.valueOf(user.getId());
 
-            return new GitHubUserDetails(userId, primaryEmail);
-        } catch(IOException e) {
-            throw new IllegalStateException(e); // TODO: handle properly
-        }
+        return new GitHubUserDetails(userId, primaryEmail);
     }
 
     private GitHubAuthorizationCodeExchange initializeExchange() {
@@ -66,6 +67,7 @@ public class GitHubAuthExchange extends BaseAuthExchange {
     }
 
     private static record GitHubUserDetails(String userId,
-                                            String primaryEmail) { }
+                                            String primaryEmail) {
+    }
 
 }
