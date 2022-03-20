@@ -19,12 +19,12 @@ auth:
     GOOGLE:
       client-id: "XXXXX"
       client-secret: "XXXXX"
-      redirect-uri: "http://localhost:8080/api/v1/auth/callback/google"
+      redirect-uri: "http://localhost:8080/idb/api/v1/auth/callback/google"
       enabled: true
     GITHUB:
       client-id: "XXXXX"
       client-secret: "XXXXX"
-      redirect-uri: "http://localhost:8080/api/v1/auth/callback/github"
+      redirect-uri: "http://localhost:8080/idb/api/v1/auth/callback/github"
       enabled: true
 
 server:

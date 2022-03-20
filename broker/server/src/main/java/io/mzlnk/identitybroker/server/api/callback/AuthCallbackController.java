@@ -19,7 +19,7 @@ import static org.springframework.http.HttpStatus.MOVED_PERMANENTLY;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/idb/api/v1/auth")
 public class AuthCallbackController {
 
     private final AuthCallbackProperties authCallbackProperties;

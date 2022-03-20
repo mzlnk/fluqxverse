@@ -20,7 +20,7 @@ export type IdentityProvider = {
 }
 
 export const listIdentityProviders = (setProviders: (providers: IdentityProvider[]) => void) => {
-  const url = `${process.env.REACT_APP_BASE_URL}/api/v1/identity-providers`
+  const url = `${process.env.REACT_APP_BASE_URL}/idb/api/v1/identity-providers`
   fetch(url)
     .then((response: Response) => response.json())
     .then((json: any) => setProviders(json))

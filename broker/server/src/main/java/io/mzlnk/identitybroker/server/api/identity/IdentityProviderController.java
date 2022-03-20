@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/identity-providers")
+@RequestMapping("/idb/api/v1/identity-providers")
 public class IdentityProviderController {
 
     private final IdentityProviderMapper identityProviderMapper;

@@ -53,8 +53,8 @@ public class SecurityDefaultConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/api/v1/auth/callback/**")
-                .antMatchers("/api/v1/identity-providers/**");
+                .antMatchers("/idb/api/v1/auth/callback/**")
+                .antMatchers("/idb/api/v1/identity-providers/**");
     }
 
     @Override
