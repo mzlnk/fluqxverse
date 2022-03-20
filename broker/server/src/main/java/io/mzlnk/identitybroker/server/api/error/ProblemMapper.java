@@ -18,6 +18,8 @@ import static io.mzlnk.identitybroker.server.application.logging.RequestIntercep
 public class ProblemMapper {
 
     private static final String TYPE_URI_PREFIX = "idp/api/v1/errors/";
+
+    private static final String INVALID_REQUEST_BODY_DETAIL = "Request body is invalid.";
     private static final String INVALID_PARAM_MSG_TEMPLATE = "Value of %s %s.";
 
     public Problem toProblem(Exception exception, ErrorType errorType) {
@@ -25,8 +27,13 @@ public class ProblemMapper {
     }
 
     public Problem toProblem(InvalidEnumException enumException, ValueInstantiationException valueException) {
-        String detail = "Value of %s %s.".formatted(PathUtils.getPath(valueException.getPath()), enumException.getMessage());
-        return toProblem(BAD_REQUEST, detail);
+        InvalidParameter invalidParameter = new InvalidParameter(
+                PathUtils.getPath(valueException.getPath()),
+                enumException.getValue(),
+                "Value of %s %s.".formatted(PathUtils.getPath(valueException.getPath()), enumException.getMessage())
+        );
+
+        return toProblem(INVALID_REQUEST_BODY_DETAIL, BAD_REQUEST, List.of(invalidParameter));
     }
 
     public Problem toProblem(ErrorType errorType, String detail) {
@@ -48,7 +55,7 @@ public class ProblemMapper {
                 )
                 .toList();
 
-        return toProblem("Request body is invalid.", BAD_REQUEST, invalidParameters);
+        return toProblem(INVALID_REQUEST_BODY_DETAIL, BAD_REQUEST, invalidParameters);
     }
 
     private Problem toProblem(String detail, ErrorType errorType, List<InvalidParameter> invalidParameters) {
