@@ -12,9 +12,8 @@ auth:
     token:
       issuer: "accounts.mzlnk.io"
       expiration-time: 3600
-    validation:
-      private-key: "secrets/ids-key-v1.key"
       public-key: "secrets/ids-key-v1.crt"
+      private-key: "secrets/ids-key-v1.key"
   providers:
     GOOGLE:
       client-id: "XXXXX"

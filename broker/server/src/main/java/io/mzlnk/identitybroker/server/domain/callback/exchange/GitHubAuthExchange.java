@@ -15,7 +15,6 @@ import java.io.IOException;
 
 import static io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderType.GITHUB;
 
-
 @Service
 @ConditionalOnProperty(prefix = "auth.providers.GITHUB", name = "enabled", havingValue = "true")
 public class GitHubAuthExchange extends BaseAuthExchange {

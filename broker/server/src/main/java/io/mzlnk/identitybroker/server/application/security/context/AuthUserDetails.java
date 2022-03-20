@@ -2,7 +2,6 @@ package io.mzlnk.identitybroker.server.application.security.context;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
