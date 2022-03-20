@@ -1,8 +1,9 @@
-package io.mzlnk.identitybroker.server.application.auth.jwt;
+package io.mzlnk.identitybroker.server.domain.callback;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import io.mzlnk.identitybroker.server.application.config.callback.AuthCallbackTokenProperties;
 import io.mzlnk.identitybroker.server.domain.identity.Identity;
 import lombok.RequiredArgsConstructor;
 
@@ -11,17 +12,19 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.Date;
 
 @RequiredArgsConstructor
-public class JwtService {
+public class AuthCallbackTokenService {
 
-    private final JwtTokenProperties jwtTokenProperties;
+    private static final long ONE_SECOND_IN_MILLIS = 1000;
+
+    private final AuthCallbackTokenProperties tokenProperties;
     private final RSAPrivateKey privateKey;
     private final RSAPublicKey publicKey;
 
     public String createAndSignToken(Identity identity) {
         final String sub = identity.getUser().getId().toString();
-        final String iss = jwtTokenProperties.getIssuer();
+        final String iss = tokenProperties.getIssuer();
         final Date iat = new Date();
-        final Date exp = new Date(iat.getTime() + jwtTokenProperties.getExpirationTime());
+        final Date exp = new Date(iat.getTime() + tokenProperties.getExpirationTime() * ONE_SECOND_IN_MILLIS);
 
         Algorithm algorithm = Algorithm.RSA256(publicKey, privateKey);
 

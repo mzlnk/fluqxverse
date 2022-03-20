@@ -1,9 +1,9 @@
 package io.mzlnk.identitybroker.server.domain.callback.exchange;
 
-import io.mzlnk.identitybroker.server.application.auth.AuthProviderProperties;
+import io.mzlnk.identitybroker.server.application.config.callback.AuthCallbackProviderProperties;
 import io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderType;
 
-import static io.mzlnk.identitybroker.server.application.auth.AuthProviderProperties.AuthProviderDetails;
+import static io.mzlnk.identitybroker.server.application.config.callback.AuthCallbackProviderProperties.AuthProviderDetails;
 
 public abstract class BaseAuthExchange implements AuthExchange {
 
@@ -11,9 +11,9 @@ public abstract class BaseAuthExchange implements AuthExchange {
     protected final AuthProviderDetails authProviderDetails;
 
     protected BaseAuthExchange(IdentityProviderType providerType,
-                               AuthProviderProperties authProviderProperties) {
+                               AuthCallbackProviderProperties providerProperties) {
         this.providerType = providerType;
-        this.authProviderDetails = authProviderProperties.getProvider(providerType);
+        this.authProviderDetails = providerProperties.getProvider(providerType);
     }
 
     @Override

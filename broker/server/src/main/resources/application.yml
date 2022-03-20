@@ -1,7 +1,7 @@
 auth:
   callback:
     cookie:
-      name: "token"
+      name: "TOKEN"
       domain: "localhost"
       path: "/"
       same-site: "Lax"

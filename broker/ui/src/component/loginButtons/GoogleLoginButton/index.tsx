@@ -5,7 +5,7 @@ import styles from './GoogleLoginButton.module.scss'
 
 const GoogleLoginButton = ({ clientId, redirectUri }: LoginButtonProps) => {
   return (
-    <a href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&state=ruri=http://localhost:5000&response_type=code&scope=profile email&`}>
+    <a href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&state=ruri=http://localhost:12000&response_type=code&scope=profile email&`}>
       <div className={styles.googleLoginButtonContainer}>
         <FcGoogle className={styles.icon}/>
         <span className={styles.text}>Sign In with Google</span>

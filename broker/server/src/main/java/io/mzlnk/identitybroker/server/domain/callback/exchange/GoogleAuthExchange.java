@@ -5,8 +5,8 @@ import com.google.api.client.auth.oauth2.TokenResponse;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
-import io.mzlnk.identitybroker.server.application.auth.AuthProviderProperties;
-import io.mzlnk.identitybroker.server.application.auth.jwt.JwtService;
+import io.mzlnk.identitybroker.server.application.config.callback.AuthCallbackProviderProperties;
+import io.mzlnk.identitybroker.server.domain.callback.AuthCallbackTokenService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +19,14 @@ import static io.mzlnk.identitybroker.server.domain.identity.provider.IdentityPr
 @ConditionalOnProperty(prefix = "auth.providers.GOOGLE", name = "enabled", havingValue = "true")
 public class GoogleAuthExchange extends BaseAuthExchange {
 
-    private final JwtService jwtService;
+    private final AuthCallbackTokenService tokenService;
     private final AuthorizationCodeFlow flow;
 
-    public GoogleAuthExchange(AuthProviderProperties authProviderProperties,
-                              JwtService jwtService) {
-        super(GOOGLE, authProviderProperties);
+    public GoogleAuthExchange(AuthCallbackProviderProperties providerProperties,
+                              AuthCallbackTokenService tokenService) {
+        super(GOOGLE, providerProperties);
 
-        this.jwtService = jwtService;
+        this.tokenService = tokenService;
         this.flow = initializeAuthorizationCodeFlow();
     }
 
@@ -37,7 +37,7 @@ public class GoogleAuthExchange extends BaseAuthExchange {
                     .setRedirectUri(authProviderDetails.getRedirectUri())
                     .execute();
 
-            var decodedToken = jwtService.decodeToken((String) tokenResponse.get("id_token"));
+            var decodedToken = tokenService.decodeToken((String) tokenResponse.get("id_token"));
             String id = decodedToken.getSubject();
             String email = decodedToken.getClaim("email").asString();
 

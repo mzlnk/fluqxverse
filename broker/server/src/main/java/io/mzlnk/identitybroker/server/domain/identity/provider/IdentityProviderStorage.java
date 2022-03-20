@@ -1,20 +1,20 @@
 package io.mzlnk.identitybroker.server.domain.identity.provider;
 
-import io.mzlnk.identitybroker.server.application.auth.AuthProviderProperties;
+import io.mzlnk.identitybroker.server.application.config.callback.AuthCallbackProviderProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
-import static io.mzlnk.identitybroker.server.application.auth.AuthProviderProperties.AuthProviderDetails;
+import static io.mzlnk.identitybroker.server.application.config.callback.AuthCallbackProviderProperties.AuthProviderDetails;
 
 @Service
 public class IdentityProviderStorage {
 
     private final List<IdentityProvider> enabledIdentityProviders;
 
-    public IdentityProviderStorage(AuthProviderProperties authProviderProperties) {
-        this.enabledIdentityProviders = retrieveEnabledProviders(authProviderProperties.getProviders());
+    public IdentityProviderStorage(AuthCallbackProviderProperties providerProperties) {
+        this.enabledIdentityProviders = retrieveEnabledProviders(providerProperties.getProviders());
     }
 
     public List<IdentityProvider> listIdentityProviders() {

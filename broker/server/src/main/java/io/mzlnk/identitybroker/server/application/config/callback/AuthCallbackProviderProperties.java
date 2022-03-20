@@ -1,4 +1,4 @@
-package io.mzlnk.identitybroker.server.application.auth;
+package io.mzlnk.identitybroker.server.application.config.callback;
 
 import io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderType;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.util.Optional;
 import static io.mzlnk.identitybroker.server.domain.identity.provider.IdentityProviderNotSupportedException.identityProviderNotSupported;
 
 @Data
-public class AuthProviderProperties {
+public class AuthCallbackProviderProperties {
 
     private Map<IdentityProviderType, AuthProviderDetails> providers;
 

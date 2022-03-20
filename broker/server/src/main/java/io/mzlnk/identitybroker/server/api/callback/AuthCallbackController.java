@@ -1,6 +1,6 @@
 package io.mzlnk.identitybroker.server.api.callback;
 
-import io.mzlnk.identitybroker.server.application.auth.AuthCallbackProperties;
+import io.mzlnk.identitybroker.server.application.config.callback.AuthCallbackProperties;
 import io.mzlnk.identitybroker.server.domain.callback.AuthDetails;
 import io.mzlnk.identitybroker.server.domain.callback.AuthCallbackService;
 import io.mzlnk.identitybroker.server.domain.callback.OAuth2AuthorizationCodeDetails;

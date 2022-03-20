@@ -1,4 +1,4 @@
-package io.mzlnk.identitybroker.server.application.auth;
+package io.mzlnk.identitybroker.server.application.config.callback;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package io.mzlnk.identitybroker.server.domain.callback.exchange;
 
-import io.mzlnk.identitybroker.server.application.auth.AuthProviderProperties;
+import io.mzlnk.identitybroker.server.application.config.callback.AuthCallbackProviderProperties;
 import io.mzlnk.oauth2.exchange.core.ExchangeException;
 import io.mzlnk.oauth2.exchange.core.authorizationcode.GitHubAuthorizationCodeExchange;
 import io.mzlnk.oauth2.exchange.core.authorizationcode.client.GitHubOAuth2Client;
@@ -22,8 +22,8 @@ public class GitHubAuthExchange extends BaseAuthExchange {
 
     private final GitHubAuthorizationCodeExchange exchange;
 
-    public GitHubAuthExchange(AuthProviderProperties authProviderProperties) {
-        super(GITHUB, authProviderProperties);
+    public GitHubAuthExchange(AuthCallbackProviderProperties providerProperties) {
+        super(GITHUB, providerProperties);
         this.exchange = initializeExchange();
     }
 

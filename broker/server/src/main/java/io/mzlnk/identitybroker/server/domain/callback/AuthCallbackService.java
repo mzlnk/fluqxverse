@@ -1,6 +1,5 @@
 package io.mzlnk.identitybroker.server.domain.callback;
 
-import io.mzlnk.identitybroker.server.application.auth.jwt.JwtService;
 import io.mzlnk.identitybroker.server.domain.callback.exchange.AuthExchange;
 import io.mzlnk.identitybroker.server.domain.callback.exchange.AuthExchangeDetails;
 import io.mzlnk.identitybroker.server.domain.identity.Identity;
@@ -25,17 +24,17 @@ public class AuthCallbackService {
 
     private final IdentityStorage identityStorage;
     private final UserStorage userStorage;
-    private final JwtService jwtService;
+    private final AuthCallbackTokenService tokenService;
 
     private final Map<IdentityProviderType, AuthExchange> identityExchanges;
 
     public AuthCallbackService(IdentityStorage identityStorage,
                                UserStorage userStorage,
-                               JwtService jwtService,
+                               AuthCallbackTokenService tokenService,
                                List<AuthExchange> authExchanges) {
         this.identityStorage = identityStorage;
         this.userStorage = userStorage;
-        this.jwtService = jwtService;
+        this.tokenService = tokenService;
 
         this.identityExchanges = authExchanges.stream()
                 .collect(Collectors.toMap(AuthExchange::getSupportedIdentityProvider, Function.identity()));
@@ -53,7 +52,7 @@ public class AuthCallbackService {
         IdentityCreateDetails identityDetails = new IdentityCreateDetails(authDetails.id(), oAuth2Details.provider(), user);
         Identity identity = identityStorage.createIdentity(identityDetails);
 
-        String token = jwtService.createAndSignToken(identity);
+        String token = tokenService.createAndSignToken(identity);
         return new AuthDetails(token);
     }
 

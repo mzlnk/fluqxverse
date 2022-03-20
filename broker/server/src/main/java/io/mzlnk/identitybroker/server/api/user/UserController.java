@@ -2,6 +2,8 @@ package io.mzlnk.identitybroker.server.api.user;
 
 import io.mzlnk.identitybroker.server.api.user.dto.UserDetails;
 import io.mzlnk.identitybroker.server.api.user.dto.UserMapper;
+import io.mzlnk.identitybroker.server.application.security.context.UserContext;
+import io.mzlnk.identitybroker.server.domain.user.User;
 import io.mzlnk.identitybroker.server.domain.user.UserStorage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +21,8 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<UserDetails> getUserFromToken() {
-        // TODO: implement it
-        return ResponseEntity.ok(null);
+        User user = userStorage.getById(UserContext.getUserId());
+        return ResponseEntity.ok(userMapper.toUserDetails(user));
     }
 
 }
