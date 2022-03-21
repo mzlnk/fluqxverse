@@ -10,7 +10,7 @@ import java.util.List;
 public class DefaultAuthZService implements AuthZService {
 
     @Override
-    public List<? extends GrantedAuthority> fetchAuthorities(Long userId) throws AuthZException {
+    public List<? extends GrantedAuthority> fetchAuthorities(String token) throws AuthZException {
         return Collections.emptyList();
     }
 

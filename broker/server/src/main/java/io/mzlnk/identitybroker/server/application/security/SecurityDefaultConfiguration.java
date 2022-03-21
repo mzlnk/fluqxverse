@@ -34,10 +34,9 @@ public class SecurityDefaultConfiguration {
     }
 
     @Bean
-    public AuthNService defaultAuthNService(TokenReader tokenReader,
-                                            AuthCallbackTokenProperties tokenProperties,
+    public AuthNService defaultAuthNService(AuthCallbackTokenProperties tokenProperties,
                                             @Value("${auth.jwt.token.public-key}") RSAPublicKey publicKey) {
-        return new DefaultAuthNService(tokenReader, tokenProperties, publicKey);
+        return new DefaultAuthNService(tokenProperties, publicKey);
     }
 
     @Bean

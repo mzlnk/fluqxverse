@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface AuthNService {
 
-    Long getPrincipal(HttpServletRequest httpRequest);
-    JwtAuthCredentials getCredential(HttpServletRequest httpRequest);
+    Long getPrincipal(String token);
+    JwtAuthCredentials getCredentials(String token);
 
 }

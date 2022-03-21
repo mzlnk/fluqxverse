@@ -8,31 +8,26 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.Payload;
 import io.mzlnk.identitybroker.server.application.config.callback.AuthCallbackTokenProperties;
 import io.mzlnk.identitybroker.server.application.security.auth.credentials.JwtAuthCredentials;
-import io.mzlnk.identitybroker.server.application.security.auth.credentials.TokenReader;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedCredentialsNotFoundException;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Optional;
 
 public class DefaultAuthNService implements AuthNService {
 
-    private final TokenReader tokenReader;
     private final JWTVerifier jwtVerifier;
 
-    public DefaultAuthNService(TokenReader tokenReader,
-                               AuthCallbackTokenProperties tokenProperties,
+    public DefaultAuthNService(AuthCallbackTokenProperties tokenProperties,
                                RSAPublicKey publicKey) {
-        this.tokenReader = tokenReader;
         this.jwtVerifier = JWT.require(Algorithm.RSA256(publicKey, null))
                 .withIssuer(tokenProperties.getIssuer())
                 .build();
     }
 
     @Override
-    public Long getPrincipal(HttpServletRequest httpRequest) {
-        return Optional.ofNullable(tokenReader.readToken(httpRequest))
+    public Long getPrincipal(String token) {
+        return Optional.ofNullable(token)
                 .map(JWT::decode)
                 .map(Payload::getSubject)
                 .map(Long::parseLong)
@@ -40,9 +35,8 @@ public class DefaultAuthNService implements AuthNService {
     }
 
     @Override
-    public JwtAuthCredentials getCredential(HttpServletRequest httpRequest) {
+    public JwtAuthCredentials getCredentials(String token) {
         try {
-            String token = tokenReader.readToken(httpRequest);
             DecodedJWT decoded = jwtVerifier.verify(token);
 
             Long userId = Long.parseLong(decoded.getSubject());

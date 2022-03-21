@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface AuthZService {
 
-    List<? extends GrantedAuthority> fetchAuthorities(Long userId) throws AuthZException;
+    List<? extends GrantedAuthority> fetchAuthorities(String token) throws AuthZException;
 
 }

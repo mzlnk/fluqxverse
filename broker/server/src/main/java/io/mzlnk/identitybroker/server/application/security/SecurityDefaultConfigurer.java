@@ -4,6 +4,7 @@ import io.mzlnk.identitybroker.server.application.security.auth.AuthUserDetailsF
 import io.mzlnk.identitybroker.server.application.security.auth.AuthUserDetailsService;
 import io.mzlnk.identitybroker.server.application.security.auth.authn.AuthNService;
 import io.mzlnk.identitybroker.server.application.security.auth.authz.AuthZService;
+import io.mzlnk.identitybroker.server.application.security.auth.credentials.TokenReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +33,8 @@ public class SecurityDefaultConfigurer extends WebSecurityConfigurerAdapter {
     private final AuthenticationFailureHandler authenticationFailureHandler;
     private final AuthenticationEntryPoint authenticationEntryPoint;
     private final AccessDeniedHandler accessDeniedHandler;
+
+    private final TokenReader tokenReader;
 
     private final AuthNService authNService;
     private final AuthZService authZService;
@@ -81,6 +84,7 @@ public class SecurityDefaultConfigurer extends WebSecurityConfigurerAdapter {
         return new AuthUserDetailsFilter(
                 authenticationManagerBean(),
                 authenticationFailureHandler,
+                tokenReader,
                 authNService
         );
     }

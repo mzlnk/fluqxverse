@@ -32,7 +32,7 @@ public class AuthUserDetailsService implements AuthenticationUserDetailsService<
 
     private AuthUserDetails buildUserDetails(JwtAuthCredentials credentials) {
         return AuthUserDetails.create()
-                .authorities(authZService.fetchAuthorities(credentials.userId()))
+                .authorities(authZService.fetchAuthorities(credentials.jwtToken()))
                 .username(credentials.userId().toString())
                 .userId(credentials.userId())
                 .build();

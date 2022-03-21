@@ -2,6 +2,7 @@ package io.mzlnk.identitybroker.server.application.security.auth;
 
 import io.mzlnk.identitybroker.server.application.security.auth.authn.AuthNService;
 import io.mzlnk.identitybroker.server.application.security.auth.credentials.JwtAuthCredentials;
+import io.mzlnk.identitybroker.server.application.security.auth.credentials.TokenReader;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -17,15 +18,18 @@ import java.io.IOException;
 
 public class AuthUserDetailsFilter extends AbstractPreAuthenticatedProcessingFilter {
 
+    private final TokenReader tokenReader;
     private final AuthNService authNService;
 
     public AuthUserDetailsFilter(AuthenticationManager authenticationManager,
                                  AuthenticationFailureHandler authenticationFailureHandler,
+                                 TokenReader tokenReader,
                                  AuthNService authNService) {
         this.setAuthenticationManager(authenticationManager);
         this.setAuthenticationFailureHandler(authenticationFailureHandler);
         this.setContinueFilterChainOnUnsuccessfulAuthentication(false);
 
+        this.tokenReader = tokenReader;
         this.authNService = authNService;
     }
 
@@ -40,12 +44,12 @@ public class AuthUserDetailsFilter extends AbstractPreAuthenticatedProcessingFil
 
     @Override
     protected Long getPreAuthenticatedPrincipal(HttpServletRequest request) {
-        return this.authNService.getPrincipal(request);
+        return this.authNService.getPrincipal(tokenReader.readToken(request));
     }
 
     @Override
     protected JwtAuthCredentials getPreAuthenticatedCredentials(HttpServletRequest request) {
-        return this.authNService.getCredential(request);
+        return this.authNService.getCredentials(tokenReader.readToken(request));
     }
 
 }
