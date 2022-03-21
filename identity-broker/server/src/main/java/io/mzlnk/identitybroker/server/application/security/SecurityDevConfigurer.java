@@ -2,6 +2,7 @@ package io.mzlnk.identitybroker.server.application.security;
 
 import io.mzlnk.identitybroker.server.application.security.auth.authn.AuthNService;
 import io.mzlnk.identitybroker.server.application.security.auth.authz.AuthZService;
+import io.mzlnk.identitybroker.server.application.security.auth.credentials.TokenReader;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
@@ -21,9 +22,10 @@ public class SecurityDevConfigurer extends SecurityDefaultConfigurer {
     public SecurityDevConfigurer(AuthenticationFailureHandler failureHandler,
                                  AuthenticationEntryPoint authenticationEntryPoint,
                                  AccessDeniedHandler accessDeniedHandler,
+                                 TokenReader tokenReader,
                                  AuthNService authNService,
                                  AuthZService authZService) {
-        super(failureHandler, authenticationEntryPoint, accessDeniedHandler, authNService, authZService);
+        super(failureHandler, authenticationEntryPoint, accessDeniedHandler, tokenReader, authNService, authZService);
     }
 
     @Override
