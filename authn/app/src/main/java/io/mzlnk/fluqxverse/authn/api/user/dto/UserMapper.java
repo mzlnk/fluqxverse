@@ -1,7 +1,7 @@
 package io.mzlnk.fluqxverse.authn.api.user.dto;
 
-import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.Identity;
-import io.mzlnk.fluqxverse.identitybroker.domain.user.User;
+import io.mzlnk.fluqxverse.authn.domain.identity.Identity;
+import io.mzlnk.fluqxverse.authn.domain.user.User;
 import org.springframework.stereotype.Component;
 
 @Component

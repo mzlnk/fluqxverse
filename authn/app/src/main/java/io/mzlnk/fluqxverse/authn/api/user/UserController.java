@@ -2,9 +2,9 @@ package io.mzlnk.fluqxverse.authn.api.user;
 
 import io.mzlnk.fluqxverse.authn.api.user.dto.UserDetails;
 import io.mzlnk.fluqxverse.authn.api.user.dto.UserMapper;
-import io.mzlnk.fluqxverse.authn.application.security.context.UserContext;
 import io.mzlnk.fluqxverse.authn.domain.user.User;
 import io.mzlnk.fluqxverse.authn.domain.user.UserStorage;
+import io.mzlnk.fluqxverse.springboot.authsecurity.context.UserContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

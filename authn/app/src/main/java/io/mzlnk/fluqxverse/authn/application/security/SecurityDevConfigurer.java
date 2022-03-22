@@ -1,8 +1,8 @@
 package io.mzlnk.fluqxverse.authn.application.security;
 
-import io.mzlnk.fluqxverse.authn.application.security.auth.authn.AuthNService;
-import io.mzlnk.fluqxverse.authn.application.security.auth.authz.AuthZService;
-import io.mzlnk.fluqxverse.authn.application.security.auth.credentials.TokenReader;
+import io.mzlnk.fluqxverse.springboot.authsecurity.authn.AuthNService;
+import io.mzlnk.fluqxverse.springboot.authsecurity.authz.AuthZService;
+import io.mzlnk.fluqxverse.springboot.authsecurity.credentials.TokenReader;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
@@ -19,13 +19,14 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 @EnableWebSecurity
 public class SecurityDevConfigurer extends SecurityDefaultConfigurer {
 
-    public SecurityDevConfigurer(AuthenticationFailureHandler failureHandler,
+    public SecurityDevConfigurer(AuthenticationFailureHandler authenticationFailureHandler,
                                  AuthenticationEntryPoint authenticationEntryPoint,
                                  AccessDeniedHandler accessDeniedHandler,
                                  TokenReader tokenReader,
                                  AuthNService authNService,
                                  AuthZService authZService) {
-        super(failureHandler, authenticationEntryPoint, accessDeniedHandler, tokenReader, authNService, authZService);
+
+        super(authenticationFailureHandler, authenticationEntryPoint, accessDeniedHandler, tokenReader, authNService, authZService);
     }
 
     @Override
@@ -34,8 +35,8 @@ public class SecurityDevConfigurer extends SecurityDefaultConfigurer {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+    protected void configureInternal(HttpSecurity http) throws Exception {
+        super.configureInternal(http);
 
         http.formLogin().disable()
                 .headers().frameOptions().sameOrigin()

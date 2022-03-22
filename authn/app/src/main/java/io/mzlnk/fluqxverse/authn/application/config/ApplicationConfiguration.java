@@ -1,14 +1,14 @@
-package io.mzlnk.fluqxverse.springboot.authsecurity;
+package io.mzlnk.fluqxverse.authn.application.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.zalando.problem.jackson.ProblemModule;
 
 @Configuration
-public class AutoConfiguration {
+public class ApplicationConfiguration {
 
-    @ConditionalOnMissingBean(value = ObjectMapper.class)
+    @Bean
     public ObjectMapper objectMapper() {
         return new ObjectMapper()
                 .registerModule(new ProblemModule());

@@ -42,6 +42,10 @@ public class BaseSecurityConfigurer extends WebSecurityConfigurerAdapter {
         this.authZService = authZService;
     }
 
+    protected void configureInternal(HttpSecurity http) throws Exception {
+
+    }
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -57,7 +61,7 @@ public class BaseSecurityConfigurer extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected final void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(authUserDetailsFilter(), BasicAuthenticationFilter.class)
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -67,6 +71,8 @@ public class BaseSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .accessDeniedHandler(accessDeniedHandler);
+
+        configureInternal(http);
     }
 
     private AuthUserDetailsService authUserDetailsService() {

@@ -1,10 +1,10 @@
 package io.mzlnk.fluqxverse.authn.application.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.mzlnk.fluqxverse.authn.application.security.authz.DefaultAuthZService;
 import io.mzlnk.fluqxverse.springboot.authsecurity.authn.AuthNService;
 import io.mzlnk.fluqxverse.springboot.authsecurity.authn.DefaultAuthNService;
 import io.mzlnk.fluqxverse.springboot.authsecurity.authz.AuthZService;
-import io.mzlnk.fluqxverse.springboot.authsecurity.authz.DefaultAuthZService;
 import io.mzlnk.fluqxverse.springboot.authsecurity.credentials.*;
 import io.mzlnk.fluqxverse.springboot.authsecurity.error.DefaultAccessDeniedHandler;
 import io.mzlnk.fluqxverse.springboot.authsecurity.error.DefaultAuthenticationEntryPoint;

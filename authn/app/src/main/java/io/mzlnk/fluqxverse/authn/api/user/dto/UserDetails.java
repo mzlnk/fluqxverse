@@ -1,6 +1,6 @@
 package io.mzlnk.fluqxverse.authn.api.user.dto;
 
-import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderType;
+import io.mzlnk.fluqxverse.authn.domain.identity.IdentityProviderType;
 
 import java.util.List;
 

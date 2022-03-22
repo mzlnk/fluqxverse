@@ -1,7 +1,7 @@
 package io.mzlnk.fluqxverse.authn.application.security;
 
-import io.mzlnk.fluqxverse.authn.application.security.auth.authz.AuthZService;
-import io.mzlnk.fluqxverse.authn.application.security.auth.authz.DevAuthZService;
+import io.mzlnk.fluqxverse.authn.application.security.authz.DevAuthZService;
+import io.mzlnk.fluqxverse.springboot.authsecurity.authz.AuthZService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
