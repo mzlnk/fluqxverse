@@ -1,12 +1,13 @@
 package io.mzlnk.fluqxverse.identitybroker.domain.callback;
 
-import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityStorage;
+import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.AuthNApi;
+import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.IdentityCreateRequest;
+import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.IdentityDetails;
+import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.UserCreateRequest;
+import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.UserDetails;
 import io.mzlnk.fluqxverse.identitybroker.domain.callback.exchange.AuthExchange;
 import io.mzlnk.fluqxverse.identitybroker.domain.callback.exchange.AuthExchangeDetails;
-import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.Identity;
 import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderType;
-import io.mzlnk.fluqxverse.identitybroker.domain.user.User;
-import io.mzlnk.fluqxverse.identitybroker.domain.user.UserStorage;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,18 +22,15 @@ import static io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.Identit
 @Service
 public class AuthCallbackService {
 
-    private final IdentityStorage identityStorage;
-    private final UserStorage userStorage;
+    private final AuthNApi authNApi;
     private final AuthCallbackTokenService tokenService;
 
     private final Map<IdentityProviderType, AuthExchange> identityExchanges;
 
-    public AuthCallbackService(IdentityStorage identityStorage,
-                               UserStorage userStorage,
+    public AuthCallbackService(AuthNApi authNApi,
                                AuthCallbackTokenService tokenService,
                                List<AuthExchange> authExchanges) {
-        this.identityStorage = identityStorage;
-        this.userStorage = userStorage;
+        this.authNApi = authNApi;
         this.tokenService = tokenService;
 
         this.identityExchanges = authExchanges.stream()
@@ -45,18 +43,20 @@ public class AuthCallbackService {
 
         AuthExchangeDetails authDetails = authExchange.exchangeAuthorizationCodeForIdentity(oAuth2Details.authorizationCode());
 
-        User user = userStorage.findByEmail(authDetails.email())
+        UserDetails user = authNApi.findUserByEmail(authDetails.email())
                 .orElseGet(createUserFromIdentity(authDetails));
 
-        IdentityStorage.IdentityCreateDetails identityDetails = new IdentityStorage.IdentityCreateDetails(authDetails.id(), oAuth2Details.provider(), user);
-        Identity identity = identityStorage.createIdentity(identityDetails);
+        if (!user.linkedProviders().contains(oAuth2Details.provider())) {
+            IdentityCreateRequest identityCreateRequest = new IdentityCreateRequest(authDetails.id(), oAuth2Details.provider(), user.id());
+            IdentityDetails identity = authNApi.createIdentity(identityCreateRequest);
+        }
 
-        String token = tokenService.createAndSignToken(identity);
+        String token = tokenService.createAndSignToken(user);
         return new AuthDetails(token);
     }
 
-    private Supplier<User> createUserFromIdentity(AuthExchangeDetails identityDetails) {
-        return () -> userStorage.create(new UserStorage.CreateUserDetails(identityDetails.email()));
+    private Supplier<UserDetails> createUserFromIdentity(AuthExchangeDetails identityDetails) {
+        return () -> authNApi.createUser(new UserCreateRequest(identityDetails.email(), identityDetails.email()));
     }
 
 }

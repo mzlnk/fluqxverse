@@ -31,13 +31,6 @@ public class SecurityDefaultConfigurer extends BaseSecurityConfigurer {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/idb/api/v1/auth/callback/**")
-                .antMatchers("/idb/api/v1/identity-providers/**");
-    }
-
-    @Override
     protected void configureInternal(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .anyRequest().authenticated();

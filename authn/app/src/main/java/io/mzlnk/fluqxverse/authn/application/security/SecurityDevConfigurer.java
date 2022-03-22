@@ -30,11 +30,6 @@ public class SecurityDevConfigurer extends SecurityDefaultConfigurer {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        super.configure(web);
-    }
-
-    @Override
     protected void configureInternal(HttpSecurity http) throws Exception {
         super.configureInternal(http);
 

@@ -4,7 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import io.mzlnk.fluqxverse.identitybroker.application.config.callback.AuthCallbackTokenProperties;
-import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.Identity;
+import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.UserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +18,8 @@ public class AuthCallbackTokenService {
 
     private final AuthCallbackTokenProperties tokenProperties;
 
-    public String createAndSignToken(Identity identity) {
-        final String sub = identity.getUser().getId().toString();
+    public String createAndSignToken(UserDetails userDetails) {
+        final String sub = userDetails.id().toString();
         final String iss = tokenProperties.getIssuer();
         final Date iat = new Date();
         final Date exp = new Date(iat.getTime() + tokenProperties.getExpirationTime() * ONE_SECOND_IN_MILLIS);

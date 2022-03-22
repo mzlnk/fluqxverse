@@ -17,13 +17,14 @@ public class AuthUserDetails extends User {
     private final Long userId;
 
     private AuthUserDetails(String username,
+                            String password,
                             boolean enabled,
                             boolean accountNonExpired,
                             boolean credentialsNonExpired,
                             boolean accountNonLocked,
                             Collection<? extends GrantedAuthority> authorities,
                             Long userId) {
-        super(username, MASKED_PASSWORD, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.userId = userId;
     }
 
@@ -33,7 +34,7 @@ public class AuthUserDetails extends User {
 
     public static class AuthUserDetailsBuilder {
 
-        private User.UserBuilder userBuilder = User.builder();
+        private User.UserBuilder userBuilder = User.builder().password(MASKED_PASSWORD);
         private Long userId;
 
         public AuthUserDetailsBuilder username(String username) {
@@ -90,6 +91,7 @@ public class AuthUserDetails extends User {
             UserDetails user = userBuilder.build();
             return new AuthUserDetails(
                     user.getUsername(),
+                    user.getPassword(),
                     user.isEnabled(),
                     user.isAccountNonExpired(),
                     user.isCredentialsNonExpired(),
