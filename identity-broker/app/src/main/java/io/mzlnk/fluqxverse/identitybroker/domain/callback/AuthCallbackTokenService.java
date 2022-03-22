@@ -4,7 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import io.mzlnk.fluqxverse.identitybroker.application.config.callback.AuthCallbackTokenProperties;
-import io.mzlnk.fluqxverse.identitybroker.domain.identity.Identity;
+import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.Identity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package io.mzlnk.fluqxverse.identitybroker.domain.callback.exchange;
 
-import io.mzlnk.fluqxverse.identitybroker.domain.identity.provider.IdentityProviderType;
+import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderType;
 
 public interface AuthExchange {
 

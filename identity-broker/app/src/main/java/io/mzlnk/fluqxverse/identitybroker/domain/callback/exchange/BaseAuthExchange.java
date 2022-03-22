@@ -1,7 +1,7 @@
 package io.mzlnk.fluqxverse.identitybroker.domain.callback.exchange;
 
 import io.mzlnk.fluqxverse.identitybroker.application.config.callback.AuthCallbackProviderProperties;
-import io.mzlnk.fluqxverse.identitybroker.domain.identity.provider.IdentityProviderType;
+import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderType;
 
 import static io.mzlnk.fluqxverse.identitybroker.application.config.callback.AuthCallbackProviderProperties.AuthProviderDetails;
 

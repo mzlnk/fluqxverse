@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 
-import static io.mzlnk.fluqxverse.identitybroker.domain.identity.provider.IdentityProviderType.GOOGLE;
+import static io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderType.GOOGLE;
 
 @Service
 @ConditionalOnProperty(prefix = "auth.providers.GOOGLE", name = "enabled", havingValue = "true")

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import static io.mzlnk.fluqxverse.identitybroker.domain.identity.provider.IdentityProviderType.GITHUB;
-import static io.mzlnk.fluqxverse.identitybroker.domain.identity.provider.IdentityProviderType.GOOGLE;
+import static io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderType.GITHUB;
+import static io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderType.GOOGLE;
 import static org.springframework.http.HttpStatus.MOVED_PERMANENTLY;
 
 @RestController

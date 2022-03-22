@@ -1,7 +1,7 @@
 package io.mzlnk.fluqxverse.identitybroker.domain.callback.exchange;
 
 import io.mzlnk.fluqxverse.identitybroker.application.config.callback.AuthCallbackProviderProperties;
-import io.mzlnk.fluqxverse.identitybroker.domain.identity.provider.IdentityProviderType;
+import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderType;
 import io.mzlnk.oauth2.exchange.core.ExchangeException;
 import io.mzlnk.oauth2.exchange.core.authorizationcode.GitHubAuthorizationCodeExchange;
 import io.mzlnk.oauth2.exchange.core.authorizationcode.client.GitHubOAuth2Client;

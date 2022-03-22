@@ -1,12 +1,12 @@
 package io.mzlnk.fluqxverse.identitybroker.application.config.callback;
 
-import io.mzlnk.fluqxverse.identitybroker.domain.identity.provider.IdentityProviderType;
+import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderType;
 import lombok.Data;
 
 import java.util.Map;
 import java.util.Optional;
 
-import static io.mzlnk.fluqxverse.identitybroker.domain.identity.provider.IdentityProviderNotSupportedException.identityProviderNotSupported;
+import static io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderNotSupportedException.identityProviderNotSupported;
 
 @Data
 public class AuthCallbackProviderProperties {

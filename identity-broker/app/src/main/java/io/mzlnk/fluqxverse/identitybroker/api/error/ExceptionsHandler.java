@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import io.mzlnk.fluqxverse.identitybroker.common.exception.InvalidEnumException;
 import io.mzlnk.fluqxverse.identitybroker.common.exception.NotFoundException;
 import io.mzlnk.fluqxverse.identitybroker.domain.callback.exchange.AuthCallbackException;
-import io.mzlnk.fluqxverse.identitybroker.domain.identity.provider.IdentityProviderNotSupportedException;
+import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderNotSupportedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

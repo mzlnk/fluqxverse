@@ -1,10 +1,10 @@
 package io.mzlnk.fluqxverse.identitybroker.domain.callback;
 
-import io.mzlnk.fluqxverse.identitybroker.domain.identity.IdentityStorage;
+import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityStorage;
 import io.mzlnk.fluqxverse.identitybroker.domain.callback.exchange.AuthExchange;
 import io.mzlnk.fluqxverse.identitybroker.domain.callback.exchange.AuthExchangeDetails;
-import io.mzlnk.fluqxverse.identitybroker.domain.identity.Identity;
-import io.mzlnk.fluqxverse.identitybroker.domain.identity.provider.IdentityProviderType;
+import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.Identity;
+import io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderType;
 import io.mzlnk.fluqxverse.identitybroker.domain.user.User;
 import io.mzlnk.fluqxverse.identitybroker.domain.user.UserStorage;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static io.mzlnk.fluqxverse.identitybroker.domain.identity.provider.IdentityProviderNotSupportedException.identityProviderNotSupported;
+import static io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.IdentityProviderNotSupportedException.identityProviderNotSupported;
 
 @Service
 public class AuthCallbackService {
