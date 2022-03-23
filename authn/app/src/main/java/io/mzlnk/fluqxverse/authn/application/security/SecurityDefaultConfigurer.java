@@ -31,6 +31,11 @@ public class SecurityDefaultConfigurer extends BaseSecurityConfigurer {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().anyRequest(); //FIXME: for testing purposes
+    }
+
+    @Override
     protected void configureInternal(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .anyRequest().authenticated();

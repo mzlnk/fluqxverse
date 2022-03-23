@@ -1,24 +1,16 @@
 package io.mzlnk.fluqxverse.identitybroker.application.s2s.authn;
 
-import feign.Headers;
-import feign.Param;
-import feign.RequestLine;
 import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.IdentityCreateRequest;
 import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.IdentityDetails;
 import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.UserCreateRequest;
 import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.UserDetails;
 
-public interface AuthNApi {
+import java.util.Optional;
 
-    @RequestLine("GET /authn/api/v1/users/email/{email}")
-    UserDetails getUserByEmail(@Param("email") String email);
+public interface AuthNService {
 
-    @RequestLine("POST /authn/api/v1/users")
-    @Headers("Content-Type: application/json")
+    Optional<UserDetails> findUserByEmail(String email);
     UserDetails createUser(UserCreateRequest userCreateRequest);
-
-    @RequestLine("POST /authn/api/v1/identities")
-    @Headers("Content-Type: application/json")
     IdentityDetails createIdentity(IdentityCreateRequest identityCreateRequest);
 
 }

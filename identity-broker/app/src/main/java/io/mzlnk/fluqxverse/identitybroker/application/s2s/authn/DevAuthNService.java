@@ -8,13 +8,13 @@ import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.UserDetails;
 import java.util.Collections;
 import java.util.Optional;
 
-public class DevAuthNApi implements AuthNApi {
+public class DevAuthNService implements AuthNService {
 
     private long userIdSequence = 0L;
 
     @Override
     public UserDetails createUser(UserCreateRequest userCreateRequest) {
-        return new UserDetails(++userIdSequence, userCreateRequest.email(), Collections.emptyList());
+        return new UserDetails(++userIdSequence, userCreateRequest.getEmail(), Collections.emptyList());
     }
 
     @Override
@@ -24,7 +24,7 @@ public class DevAuthNApi implements AuthNApi {
 
     @Override
     public IdentityDetails createIdentity(IdentityCreateRequest identityCreateRequest) {
-        return new IdentityDetails(identityCreateRequest.id(), identityCreateRequest.identityProviderType(), userIdSequence);
+        return new IdentityDetails(identityCreateRequest.getId(), identityCreateRequest.getProvider(), userIdSequence);
     }
 
 }

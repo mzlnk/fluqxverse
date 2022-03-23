@@ -24,6 +24,10 @@ public class Identity {
     @JoinColumn(name = "USER_ID")
     private User user;
 
+    public String getId() {
+        return identityId.getId();
+    }
+
     public IdentityProviderType getIdentityProviderType() {
         return identityId.getIdentityProviderType();
     }

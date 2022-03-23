@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-    public UserDetails toUserDetails(User user) {
+    public UserResponse toUserResponse(User user) {
         final var linkedProviders = user.getIdentities().stream()
                 .map(Identity::getIdentityProviderType)
                 .toList();
 
-        return new UserDetails(
+        return new UserResponse(
                 user.getId(),
                 user.getEmail(),
                 linkedProviders

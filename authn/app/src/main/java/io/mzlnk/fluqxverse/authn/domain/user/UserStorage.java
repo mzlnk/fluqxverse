@@ -3,6 +3,7 @@ package io.mzlnk.fluqxverse.authn.domain.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static io.mzlnk.fluqxverse.authn.domain.user.UserNotFoundException.userNotFound;
@@ -17,8 +18,8 @@ public class UserStorage {
         return userRepository.findById(id);
     }
 
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(userNotFound(email));
     }
 
     public User getById(Long id) {
@@ -28,6 +29,8 @@ public class UserStorage {
     public User create(CreateUserDetails createDetails) {
         User user = User.builder()
                 .email(createDetails.email())
+                .username(createDetails.username())
+                .identities(Collections.emptySet())
                 .build();
 
         return userRepository.save(user);

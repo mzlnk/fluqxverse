@@ -1,6 +1,6 @@
 package io.mzlnk.fluqxverse.identitybroker.domain.callback;
 
-import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.AuthNApi;
+import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.AuthNService;
 import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.IdentityCreateRequest;
 import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.IdentityDetails;
 import io.mzlnk.fluqxverse.identitybroker.application.s2s.authn.dto.UserCreateRequest;
@@ -22,15 +22,15 @@ import static io.mzlnk.fluqxverse.identitybroker.domain.identityprovider.Identit
 @Service
 public class AuthCallbackService {
 
-    private final AuthNApi authNApi;
+    private final AuthNService authNService;
     private final AuthCallbackTokenService tokenService;
 
     private final Map<IdentityProviderType, AuthExchange> identityExchanges;
 
-    public AuthCallbackService(AuthNApi authNApi,
+    public AuthCallbackService(AuthNService authNService,
                                AuthCallbackTokenService tokenService,
                                List<AuthExchange> authExchanges) {
-        this.authNApi = authNApi;
+        this.authNService = authNService;
         this.tokenService = tokenService;
 
         this.identityExchanges = authExchanges.stream()
@@ -43,12 +43,12 @@ public class AuthCallbackService {
 
         AuthExchangeDetails authDetails = authExchange.exchangeAuthorizationCodeForIdentity(oAuth2Details.authorizationCode());
 
-        UserDetails user = authNApi.findUserByEmail(authDetails.email())
+        UserDetails user = authNService.findUserByEmail(authDetails.email())
                 .orElseGet(createUserFromIdentity(authDetails));
 
         if (!user.linkedProviders().contains(oAuth2Details.provider())) {
             IdentityCreateRequest identityCreateRequest = new IdentityCreateRequest(authDetails.id(), oAuth2Details.provider(), user.id());
-            IdentityDetails identity = authNApi.createIdentity(identityCreateRequest);
+            IdentityDetails identity = authNService.createIdentity(identityCreateRequest);
         }
 
         String token = tokenService.createAndSignToken(user);
@@ -56,7 +56,7 @@ public class AuthCallbackService {
     }
 
     private Supplier<UserDetails> createUserFromIdentity(AuthExchangeDetails identityDetails) {
-        return () -> authNApi.createUser(new UserCreateRequest(identityDetails.email(), identityDetails.email()));
+        return () -> authNService.createUser(new UserCreateRequest(identityDetails.email(), identityDetails.email()));
     }
 
 }
