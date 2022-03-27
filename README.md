@@ -14,6 +14,9 @@
   <img src="https://img.shields.io/badge/IntelliJ_IDEA-3E66E2?style=for-the-badge&logo=intellij-idea&logoColor=white"/>
 </p>
 
+## ⚠️ We moved to organization! ⚠️
+For better User Experience and project maintenance we moved to a brand new [Fluqxverse organization](https://github.com/fluqxverse) 🔥 You can find all of the repositories and all futures changes there whereas this repository will be only for information and redirection purposes.
+
 ## About 🔍
 Fluqxverse is my personal project developed in free time and it is focused on building consistent and reliable microservice architecture based on JVM using latest technologies and approaches.
 
