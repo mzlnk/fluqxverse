@@ -1,5 +1,0 @@
-security:
-  jwt:
-    token:
-      issuer: "accounts.fluqxverse.mzlnk.io"
-      public-key: "secrets/ids-key-v1.crt"

@@ -1,7 +1,0 @@
-@use '../loginButtons.module';
-
-.keycloakLoginButtonContainer {
-  @extend .loginButtonContainer;
-  background-color: white;
-  border: solid 1px #e5e5e5;
-}

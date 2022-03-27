@@ -1,5 +1,0 @@
-# Identity broker
-
-## About
-
-TBA

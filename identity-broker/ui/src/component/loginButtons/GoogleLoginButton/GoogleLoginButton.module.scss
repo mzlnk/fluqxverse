@@ -1,7 +1,0 @@
-@use '../loginButtons.module';
-
-.googleLoginButtonContainer {
-  @extend .loginButtonContainer;
-  background-color: white;
-  border: solid 1px #e5e5e5;
-}

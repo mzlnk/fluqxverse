@@ -1,5 +1,0 @@
-# AuthN
-
-## About
-
-TBA

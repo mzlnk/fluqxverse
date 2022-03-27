@@ -1,5 +1,0 @@
-# AuthZ
-
-## About
-
-TBA
